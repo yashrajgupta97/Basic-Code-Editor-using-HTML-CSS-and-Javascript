@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>code Editor</title>
+          <link rel="stylesheet"  href="style.css" >
+          <script src="https://kit.fontawesome.com/8d0fe5faf0.js" crossorigin="anonymous"></script>
+
+          
+</head>
+<body>
+       
+      <!--Making a container and in which subcontainer left and right  -->
+
+         <div class="container">
+                  <div class="left">
+
+                     <!-- Making HTML logo,copy and save button,text area to write html code  -->
+
+                      <label> <i class="fa-brands fa-html5"></i>HTML</label>
+                      <input type="button" value="copy"  class="btn1">
+                      <button onclick="save1()"> Save </button>
+                      <textarea id="htmlcode"  onkeyup="run()"></textarea>
+
+
+
+                      <!-- Making CSS logo,copy and save button,text area to write CSS code  -->
+
+                      <label><i class="fa-brands fa-css3-alt"></i>CSS</label>
+                      <input type="button" value="copy"  class="btn2">
+                      <button onclick="save2()"> Save </button>
+                      <textarea id="csscode" onkeyup="run()" ></textarea>
+
+
+
+                      <!-- Making JS logo,copy and save button,text area to write JScode  -->
+
+                      <label><i class="fa-brands fa-js"></i>JavaScript</label>
+                      <input type="button" value="copy"  class="btn3">
+                      <button onclick="save3()"> Save </button>
+                      <textarea id="jscode" onkeyup="run()"></textarea>
+
+                 </div>
+              
+                 <!-- Making right container for get output -->
+
+                 <div class="right" >
+                    <label> <i class="fa-solid fa-circle-play"></i> output</label>
+                    <iframe id="output"></iframe>
+                 </div>   
+          
+          </div>  
+          
+          <!-- write Js code ,when run() function call by "onkeyup" command in "textarea" tag -->
+          <script>
+                    function run(){
+
+                     <!-- When user type code in "textarea" then get value by this command -->
+                     
+                       let html=document.getElementById("htmlcode").value;
+                       let css=document.getElementById("csscode").value;
+                       let js=document.getElementById("jscode").value;
+                       let output=document.getElementById("output");
+
+                       
+                        
+
+                       output.contentDocument.body.innerHTML = html + "<style>"+css+"</style>";
+                       output.contentWindow.eval(js);
+
+                    }
+          </script>
+
+     
+          <!--copy Html code in Html textarea and when user click copy button then one msg comes out "copy HTML code" -->
+          <script>
+          
+                     let btn1=document.querySelector('.btn1');
+                     btn1.addEventListener("click",function(){
+                     alert("Copy your HTML code");   
+                     let htmlcode=document.querySelector('#htmlcode');
+                     htmlcode.select();
+                     document.execCommand('copy');
+
+                     });   
+    
+          </script>
+
+
+          
+          <!-- copy CSS code in CSS textarea and when user click copy button then one msg comes out "copy CSS code"-->
+          <script>
+     
+                   let btn2=document.querySelector('.btn2');
+                   btn2.addEventListener("click",function(){
+                   alert("Copy your CSS code"); 
+                   let csscode=document.querySelector('#csscode');
+                   csscode.select();
+                   document.execCommand('copy');
+                   });   
+ 
+          </script>
+
+          <!-- copy JS code in JS textarea and when user click copy button then one msg comes out "copy JS code" -->
+          <script>
+     
+                   let btn3=document.querySelector('.btn3');
+                   btn3.addEventListener("click",function(){
+                   alert("Copy your JS code"); 
+                   let jscode=document.querySelector('#jscode');
+                   jscode.select();
+                   document.execCommand('copy');
+               });   
+ 
+          </script>
+
+
+          <!-- When user click save button then this function call and save write code in localStorage -->
+          <script>
+
+               function save1(){
+
+                 alert("save your HTML code in localStorage");
+                 localStorage.setItem('htmlcode', htmlcode.value);
+                 htmlcode.contentDocument.body.innerHTML=localStorage.html;
+      
+               }
+
+              function save2(){
+
+                 alert("save your CSS code in localStorage");
+                 localStorage.setItem('csscode', csscode.value);
+                 csscode.contentDocument.body.innerHTML=localStorage.css;
+      
+               }
+
+              function save3(){
+
+                 alert("save your JS code in localStorage");
+                 localStorage.setItem('jscode', jscode.value);
+                 jscode.contentDocument.body.innerHTML=localStorage.js;
+      
+             }
+
+           </script>
+
+             
+     
+           <script>
+
+              htmlcode.value=localStorage.htmlcode;
+              csscode.value=localStorage.csscode;
+              jscode.value=localStorage.jscode;
+              
+           </script>
+
+</body>
+</html>
